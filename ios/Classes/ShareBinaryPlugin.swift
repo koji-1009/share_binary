@@ -25,9 +25,19 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             
             let viewController = UIApplication.shared.delegate?.window??.rootViewController
             let shareSheet = UIActivityViewController(activityItems: [cacheFileURL], applicationActivities: nil)
-            if let popoverController = shareSheet.popoverPresentationController {
-                popoverController.sourceView = viewController?.view
-                popoverController.sourceRect = viewController?.view.bounds ?? .zero
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                // only ipad
+                let screenSize = viewController?.view.bounds ?? .zero
+                if let popoverController = shareSheet.popoverPresentationController {
+                    popoverController.sourceView = viewController?.view
+                    popoverController.sourceRect = CGRect(
+                        x: screenSize.size.width / 2,
+                        y: screenSize.size.height - 20,
+                        width: 0,
+                        height: 0
+                    )
+                }
             }
             viewController?.present(shareSheet, animated: true, completion: nil)
             
@@ -41,9 +51,19 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             
             let viewController = UIApplication.shared.delegate?.window??.rootViewController
             let shareSheet = UIActivityViewController(activityItems: [uri], applicationActivities: nil)
-            if let popoverController = shareSheet.popoverPresentationController {
-                popoverController.sourceView = viewController?.view
-                popoverController.sourceRect = viewController?.view.bounds ?? .zero
+
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                // only ipad
+                let screenSize = viewController?.view.bounds ?? .zero
+                if let popoverController = shareSheet.popoverPresentationController {
+                    popoverController.sourceView = viewController?.view
+                    popoverController.sourceRect = CGRect(
+                        x: screenSize.size.width / 2,
+                        y: screenSize.size.height - 20,
+                        width: 0,
+                        height: 0
+                    )
+                }
             }
             viewController?.present(shareSheet, animated: true, completion: nil)
             
@@ -52,6 +72,4 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             result(FlutterMethodNotImplemented)
         }
     }
-    
-    
 }
