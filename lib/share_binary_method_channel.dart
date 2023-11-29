@@ -7,11 +7,27 @@ import 'share_binary_platform_interface.dart';
 class MethodChannelShareBinary extends ShareBinaryPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('share_binary');
+  final methodChannel = const MethodChannel('com.dr1009.app/share_binary');
 
+  /// Share binary data
+  ///
+  ///   - [bytes] is required, set binary data.
+  ///   - [filename] is required, the extension is important for inter-app cooperation.
+  ///     On Android, the file name must be 127 characters or less.
+  ///   - [chooserTitle] is only for Android.
   @override
-  Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  Future<void> shareBinary({
+    required Uint8List bytes,
+    required String filename,
+    String? chooserTitle,
+  }) {
+    return methodChannel.invokeMethod<void>(
+      'shareBinary',
+      <String, dynamic>{
+        'bytes': bytes,
+        'filename': filename,
+        'chooserTitle': chooserTitle,
+      },
+    );
   }
 }

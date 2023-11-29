@@ -1,3 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.dr1009.app.share_binary">
+    package="com.dr1009.app.share_binary">
+
+    <application>
+        <!-- Declares a provider which allows us to store files to share in
+             '.../caches/share_plus' and grant the receiving action access -->
+        <provider
+            android:name="com.dr1009.app.share_binary.ShareFileProvider"
+            android:authorities="${applicationId}.share_binary.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/share_binary_file_paths" />
+        </provider>
+    </application>
 </manifest>

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:share_binary/share_binary.dart';
 
@@ -8,56 +6,72 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _shareBinaryPlugin = ShareBinary();
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _shareBinaryPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Plugin example app'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          OutlinedButton(
+            onPressed: () async {
+              final byteData = await rootBundle.load('assets/image.png');
+              final bytes = _converter(byteData);
+              await const ShareBinary().shareBinary(
+                bytes: bytes,
+                filename: 'image.png',
+                chooserTitle: 'Share binary',
+              );
+            },
+            child: const Text('Share Image'),
+          ),
+          OutlinedButton(
+            onPressed: () async {
+              final byteData = await rootBundle.load('assets/pdf.pdf');
+              final bytes = _converter(byteData);
+              await const ShareBinary().shareBinary(
+                bytes: bytes,
+                filename: 'pdf.pdf',
+                chooserTitle: 'Share pdf',
+              );
+            },
+            child: const Text('Share PDF'),
+          ),
+          OutlinedButton(
+            onPressed: () async {
+              final byteData = await rootBundle.load('assets/word.docx');
+              final bytes = _converter(byteData);
+              await const ShareBinary().shareBinary(
+                bytes: bytes,
+                filename: 'word.docx',
+                chooserTitle: 'Share word',
+              );
+            },
+            child: const Text('Share Word'),
+          ),
+        ],
       ),
     );
   }
+
+  Uint8List _converter(ByteData data) =>
+      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 }
