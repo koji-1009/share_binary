@@ -3,7 +3,7 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'share_binary_method_channel.dart';
 
-abstract class ShareBinaryPlatform extends PlatformInterface {
+base class ShareBinaryPlatform extends PlatformInterface {
   /// Constructs a ShareBinaryPlatform.
   ShareBinaryPlatform() : super(token: _token);
 

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'share_binary_platform_interface.dart';
 
 /// An implementation of [ShareBinaryPlatform] that uses method channels.
-class MethodChannelShareBinary extends ShareBinaryPlatform {
+final class MethodChannelShareBinary extends ShareBinaryPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('com.dr1009.app/share_binary');
