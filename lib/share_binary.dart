@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'share_binary_platform_interface.dart';
+import 'src/share_binary_platform_interface.dart';
 
 /// A plugin that easily inter-app cooperation binary
 class ShareBinary {
