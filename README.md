@@ -1,15 +1,28 @@
 # share_binary
 
-A new Flutter plugin project.
+This library allows you to use the OS's share function while treating binary files such as images and videos as binary data in dart code.
 
-## Getting Started
+## Usage
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+```dart
+import 'package:share_binary/share_binary.dart';
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Future<void> share() async {
+  final image = await rootBundle.load('assets/image.png');
+  final video = await rootBundle.load('assets/video.mp4');
 
+  // Share image
+  await const ShareBinary().shareBinary(
+    bytes: image,
+    filename: 'image.png',
+    chooserTitle: 'Share image',
+  );
+
+  // Share video
+  await const ShareBinary().shareBinary(
+    bytes: video,
+    filename: 'video.mp4',
+    chooserTitle: 'Share video',
+  );
+}
+```
