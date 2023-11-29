@@ -1,7 +1,7 @@
 name: share_binary
 description: "A new Flutter plugin project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/koji-1009/share_binary
 
 environment:
   sdk: '>=3.2.1 <4.0.0'
