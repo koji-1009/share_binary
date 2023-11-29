@@ -1,3 +1,5 @@
-## 0.0.1
+## 0.1.0
 
-* TODO: Describe initial release.
+* Initial release
+* Add `shareBinary` method
+* Add `shareUri` method
