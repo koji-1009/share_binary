@@ -30,4 +30,23 @@ class MethodChannelShareBinary extends ShareBinaryPlatform {
       },
     );
   }
+
+  /// Share [Uri]
+  ///
+  ///  - [uri] is required, set [Uri] data.
+  ///    It must be a URI with the necessary settings to share content.
+  ///  - [chooserTitle] is only for Android.
+  @override
+  Future<void> shareUri({
+    required Uri uri,
+    String? chooserTitle,
+  }) {
+    return methodChannel.invokeMethod<void>(
+      'shareUri',
+      <String, dynamic>{
+        'uri': uri.toString(),
+        'chooserTitle': chooserTitle,
+      },
+    );
+  }
 }

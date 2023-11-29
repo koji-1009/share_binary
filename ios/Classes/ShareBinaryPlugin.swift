@@ -32,6 +32,22 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             viewController?.present(shareSheet, animated: true, completion: nil)
             
             result(nil)
+        case "shareUri":
+            let uriString = args["uri"] as! String
+            guard let uri = URL(string: uriString) else {
+                result(FlutterError(code: "InvalidArgs", message: "URI is invalid", details: "uri must be able to be parsed in swift"))
+                return
+            }
+            
+            let viewController = UIApplication.shared.delegate?.window??.rootViewController
+            let shareSheet = UIActivityViewController(activityItems: [uri], applicationActivities: nil)
+            if let popoverController = shareSheet.popoverPresentationController {
+                popoverController.sourceView = viewController?.view
+                popoverController.sourceRect = viewController?.view.bounds ?? .zero
+            }
+            viewController?.present(shareSheet, animated: true, completion: nil)
+            
+            result(nil)
         default:
             result(FlutterMethodNotImplemented)
         }

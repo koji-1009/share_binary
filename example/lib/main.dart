@@ -67,6 +67,15 @@ class MyHomePage extends StatelessWidget {
             },
             child: const Text('Share Word'),
           ),
+          OutlinedButton(
+            onPressed: () async {
+              await const ShareBinary().shareUri(
+                uri: Uri.parse("https://www.google.com/"),
+                chooserTitle: 'Share URI',
+              );
+            },
+            child: const Text('Share URI'),
+          ),
         ],
       ),
     );

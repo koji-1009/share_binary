@@ -22,4 +22,18 @@ class ShareBinary {
         filename: filename,
         chooserTitle: chooserTitle,
       );
+
+  /// Share [Uri]
+  ///
+  ///  - [uri] is required, set [Uri] data.
+  ///    It must be a URI with the necessary settings to share content.
+  ///  - [chooserTitle] is only for Android.
+  Future<void> shareUri({
+    required Uri uri,
+    String? chooserTitle,
+  }) =>
+      ShareBinaryPlatform.instance.shareUri(
+        uri: uri,
+        chooserTitle: chooserTitle,
+      );
 }

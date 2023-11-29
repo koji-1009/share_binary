@@ -3,6 +3,7 @@ package com.dr1009.app.share_binary
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -77,6 +78,23 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     /* target = */
                     Intent(Intent.ACTION_VIEW)
                         .setData(uri)
+                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                    /* title = */ chooserTitle,
+                )
+                activity?.startActivity(intent)
+
+                result.success(null)
+            }
+
+            "shareUri" -> {
+                val uri = call.argument<String>("uri") as String
+                val chooserTitle = call.argument<String>("chooserTitle") ?: ""
+
+                val intent = Intent.createChooser(
+                    /* target = */
+                    Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse(uri))
                         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
                     /* title = */ chooserTitle,
