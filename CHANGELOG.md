@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Fix share behavior on iOS
+
 ## 0.2.0
 
 * Cleanup swift code
