@@ -57,15 +57,27 @@ class MyHomePage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () async {
+              final byteData = await rootBundle.load('assets/word.doc');
+              final bytes = _converter(byteData);
+              await const ShareBinary().shareBinary(
+                bytes: bytes,
+                filename: 'word.doc',
+                chooserTitle: 'Share word(doc)',
+              );
+            },
+            child: const Text('Share Word(doc)'),
+          ),
+          OutlinedButton(
+            onPressed: () async {
               final byteData = await rootBundle.load('assets/word.docx');
               final bytes = _converter(byteData);
               await const ShareBinary().shareBinary(
                 bytes: bytes,
                 filename: 'word.docx',
-                chooserTitle: 'Share word',
+                chooserTitle: 'Share word(docx)',
               );
             },
-            child: const Text('Share Word'),
+            child: const Text('Share Word(docx)'),
           ),
           OutlinedButton(
             onPressed: () async {
