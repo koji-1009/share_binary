@@ -32,13 +32,15 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             let directoryUrl = cachesDirectoryUrl.appendingPathComponent("share_binary", isDirectory: true)
             let direcotryPath = directoryUrl.path
             
-            if fileManager.fileExists(atPath: direcotryPath) {
-                try? fileManager.removeItem(atPath: direcotryPath)
+            if !fileManager.fileExists(atPath: direcotryPath) {
+                try? fileManager.createDirectory(atPath: directoryUrl.path, withIntermediateDirectories: true)
             }
-            try? fileManager.createDirectory(atPath: directoryUrl.path, withIntermediateDirectories: true)
             
             let fileUrl = directoryUrl.appendingPathComponent(filename)
             let filePath = fileUrl.path
+            if fileManager.fileExists(atPath: filePath) {
+                try? fileManager.removeItem(atPath: filePath)
+            }
             fileManager.createFile(atPath: filePath, contents: bytesTypedData.data)
             
             showShareSheet(uri: fileUrl)
@@ -76,7 +78,7 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             documentInteractionController.presentOptionsMenu(
                 from: CGRect(
                     x: view.bounds.size.width / 2,
-                    y: view.bounds.size.height - 20,
+                    y: view.bounds.size.height - 10,
                     width: 0,
                     height: 0
                 ),
