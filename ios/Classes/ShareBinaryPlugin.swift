@@ -67,24 +67,18 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        let documentInteractionController = UIDocumentInteractionController(url: uri)
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            documentInteractionController.presentOptionsMenu(
-                from: view.bounds,
-                in: view,
-                animated: true
-            )
-        } else {
-            documentInteractionController.presentOptionsMenu(
-                from: CGRect(
-                    x: view.bounds.size.width / 2,
-                    y: view.bounds.size.height - 10,
-                    width: 0,
-                    height: 0
-                ),
-                in: view,
-                animated: true
+        let activityViewController = UIActivityViewController(activityItems: [uri], applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let popoverController = activityViewController.popoverPresentationController
+            popoverController?.sourceView = view
+            popoverController?.sourceRect = CGRect(
+                x: view.bounds.size.width / 2,
+                y: view.bounds.size.height - 10,
+                width: 0,
+                height: 0
             )
         }
+        
+        rootViewController.present(activityViewController, animated: true, completion: nil)
     }
 }
