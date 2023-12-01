@@ -1,3 +1,7 @@
+## 0.2.3
+
+* Delete previous chache file before saving new one
+
 ## 0.2.2
 
 * Fix podspec
