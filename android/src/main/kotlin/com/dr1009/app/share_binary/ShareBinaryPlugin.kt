@@ -65,6 +65,9 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
 
                 val file = File(tempDir, fileName)
+                if (file.exists()) {
+                    file.delete()
+                }
                 FileOutputStream(file).use { output ->
                     output.write(bytes)
                 }
