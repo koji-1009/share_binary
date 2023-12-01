@@ -1,3 +1,7 @@
+## 0.2.2
+
+* Fix podspec
+
 ## 0.2.1
 
 * Fix share behavior on iOS
