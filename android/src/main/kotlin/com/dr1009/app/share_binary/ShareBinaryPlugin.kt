@@ -1,10 +1,8 @@
 package com.dr1009.app.share_binary
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.FileProvider
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -23,13 +21,11 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
-    private lateinit var applicationContext: Context
     private var activity: Activity? = null
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.dr1009.app/share_binary")
         channel.setMethodCallHandler(this)
-        applicationContext = flutterPluginBinding.applicationContext
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -53,12 +49,19 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
+        val activity = activity
+        if (activity == null) {
+            result.error("no_activity", "No activity", null)
+            return
+        }
+
         when (call.method) {
             "shareBinary" -> {
                 val bytes = call.argument<ByteArray>("bytes") as ByteArray
                 val fileName = call.argument<String>("filename") as String
                 val chooserTitle = call.argument<String>("chooserTitle") ?: ""
 
+                val applicationContext = activity.applicationContext
                 val tempDir = File(applicationContext.cacheDir, "share_binary")
                 if (!tempDir.exists()) {
                     tempDir.mkdir()
@@ -85,7 +88,7 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
                     /* title = */ chooserTitle,
                 )
-                activity?.startActivity(intent)
+                activity.startActivity(intent)
 
                 result.success(null)
             }
@@ -102,7 +105,7 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
                     /* title = */ chooserTitle,
                 )
-                activity?.startActivity(intent)
+                activity.startActivity(intent)
 
                 result.success(null)
             }
