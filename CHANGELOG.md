@@ -1,10 +1,14 @@
+## 1.0.0
+
+* Support web platform
+
 ## 0.2.4
 
 * Improved performance of iOS file generation process
 
 ## 0.2.3
 
-* Delete previous chache file before saving new one
+* Delete previous cache file before saving new one
 
 ## 0.2.2
 
