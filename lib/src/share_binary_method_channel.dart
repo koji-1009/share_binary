@@ -20,8 +20,8 @@ final class MethodChannelShareBinary extends ShareBinaryPlatform {
     required Uint8List bytes,
     required String filename,
     String? chooserTitle,
-  }) {
-    return methodChannel.invokeMethod<void>(
+  }) async {
+    await methodChannel.invokeMethod<void>(
       'shareBinary',
       <String, dynamic>{
         'bytes': bytes,
@@ -40,8 +40,8 @@ final class MethodChannelShareBinary extends ShareBinaryPlatform {
   Future<void> shareUri({
     required Uri uri,
     String? chooserTitle,
-  }) {
-    return methodChannel.invokeMethod<void>(
+  }) async {
+    await methodChannel.invokeMethod<void>(
       'shareUri',
       <String, dynamic>{
         'uri': uri.toString(),

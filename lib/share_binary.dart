@@ -16,12 +16,13 @@ class ShareBinary {
     required Uint8List bytes,
     required String filename,
     String? chooserTitle,
-  }) =>
-      ShareBinaryPlatform.instance.shareBinary(
-        bytes: bytes,
-        filename: filename,
-        chooserTitle: chooserTitle,
-      );
+  }) async {
+    await ShareBinaryPlatform.instance.shareBinary(
+      bytes: bytes,
+      filename: filename,
+      chooserTitle: chooserTitle,
+    );
+  }
 
   /// Share [Uri]
   ///
@@ -31,9 +32,10 @@ class ShareBinary {
   Future<void> shareUri({
     required Uri uri,
     String? chooserTitle,
-  }) =>
-      ShareBinaryPlatform.instance.shareUri(
-        uri: uri,
-        chooserTitle: chooserTitle,
-      );
+  }) async {
+    await ShareBinaryPlatform.instance.shareUri(
+      uri: uri,
+      chooserTitle: chooserTitle,
+    );
+  }
 }
