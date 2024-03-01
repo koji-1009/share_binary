@@ -1,9 +1,6 @@
-// In order to *not* need this ignore, consider extracting the "web" version
-// of your plugin as a separate package, instead of inlining it in the same
-// package as the core of your plugin.
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html show AnchorElement, Blob, Url, window;
+import 'dart:js_interop';
 
+import 'package:web/web.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:mime/mime.dart';
@@ -32,15 +29,22 @@ final class ShareBinaryWeb extends ShareBinaryPlatform {
     String? chooserTitle,
   }) async {
     final mimeType = lookupMimeType(filename) ?? 'application/octet-stream';
-    final blob = html.Blob([bytes], mimeType);
-    final url = html.Url.createObjectUrlFromBlob(blob);
+    final blob = Blob(
+      [bytes.buffer.toJS].toJS,
+      BlobPropertyBag(
+        type: mimeType,
+      ),
+    );
+    final url = URL.createObjectURL(blob);
 
-    html.AnchorElement()
+    final anchor = document.createElement('a') as HTMLAnchorElement;
+    anchor
       ..href = url
       ..download = filename
       ..click();
 
-    html.Url.revokeObjectUrl(url);
+    URL.revokeObjectURL(url);
+    anchor.remove();
   }
 
   /// Share [Uri]
@@ -53,6 +57,6 @@ final class ShareBinaryWeb extends ShareBinaryPlatform {
     required Uri uri,
     String? chooserTitle,
   }) async {
-    html.window.open(uri.toString(), '_blank');
+    window.open(uri.toString(), '_blank');
   }
 }

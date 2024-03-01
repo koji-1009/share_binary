@@ -4,8 +4,8 @@ version: 1.1.0
 homepage: https://github.com/koji-1009/share_binary
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.10.0'
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.19.0'
 
 dependencies:
   flutter:
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   plugin_platform_interface: ^2.0.0
   mime: ^1.0.0
+  web: ^0.5.0
 
 dev_dependencies:
   flutter_test:
