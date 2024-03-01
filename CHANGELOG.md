@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Add Privacy Manifest
+
 ## 1.0.1
 
 * Code cleanup
