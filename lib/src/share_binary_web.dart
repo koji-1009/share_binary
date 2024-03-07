@@ -37,8 +37,7 @@ final class ShareBinaryWeb extends ShareBinaryPlatform {
     );
     final url = URL.createObjectURL(blob);
 
-    final anchor = document.createElement('a') as HTMLAnchorElement;
-    anchor
+    final anchor = HTMLAnchorElement()
       ..href = url
       ..download = filename
       ..click();
