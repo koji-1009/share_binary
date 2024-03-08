@@ -12,8 +12,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.purple,
+          brightness: Brightness.light,
+        ),
+      ),
+      darkTheme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.purple,
+          brightness: Brightness.dark,
+        ),
+      ),
       home: const MyHomePage(),
     );
   }
@@ -43,6 +53,7 @@ class MyHomePage extends StatelessWidget {
             },
             child: const Text('Share Image'),
           ),
+          const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () async {
               final byteData = await rootBundle.load('assets/pdf.pdf');
@@ -55,6 +66,7 @@ class MyHomePage extends StatelessWidget {
             },
             child: const Text('Share PDF'),
           ),
+          const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () async {
               final byteData = await rootBundle.load('assets/word.doc');
@@ -67,6 +79,7 @@ class MyHomePage extends StatelessWidget {
             },
             child: const Text('Share Word(doc)'),
           ),
+          const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () async {
               final byteData = await rootBundle.load('assets/word.docx');
@@ -79,6 +92,7 @@ class MyHomePage extends StatelessWidget {
             },
             child: const Text('Share Word(docx)'),
           ),
+          const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () async {
               await const ShareBinary().shareUri(
