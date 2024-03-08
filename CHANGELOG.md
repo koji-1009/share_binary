@@ -1,3 +1,7 @@
+## 1.1.1
+
+* Require web package `^0.5.1`
+
 ## 1.1.0
 
 * Add Privacy Manifest
