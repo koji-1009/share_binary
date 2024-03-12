@@ -1,3 +1,7 @@
+## 1.1.2
+
+* Fix UIActivityViewController popover presentation on iPad
+
 ## 1.1.1
 
 * Require web package `^0.5.1`
