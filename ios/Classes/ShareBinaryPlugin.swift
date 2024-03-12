@@ -70,14 +70,15 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
 
         let activityViewController = UIActivityViewController(activityItems: [uri], applicationActivities: nil)
         if UIDevice.current.userInterfaceIdiom == .pad {
+            let anchorView = UIView()
+            view.addSubview(anchorView)
+
+            anchorView.translatesAutoresizingMaskIntoConstraints = false
+            anchorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            anchorView.centerYAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
             let popoverController = activityViewController.popoverPresentationController
-            popoverController?.sourceView = view
-            popoverController?.sourceRect = CGRect(
-                x: view.bounds.size.width / 2,
-                y: view.bounds.size.height - 10,
-                width: 0,
-                height: 0
-            )
+            popoverController?.sourceView = anchorView
         }
 
         rootViewController.present(activityViewController, animated: true, completion: nil)
