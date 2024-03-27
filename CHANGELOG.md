@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Remove Privacy Manifest
+
 ## 1.1.2
 
 * Fix UIActivityViewController popover presentation on iPad
