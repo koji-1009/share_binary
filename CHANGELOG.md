@@ -1,3 +1,8 @@
+## 1.3.0
+
+* Support Swift Package Manager
+* Minimum iOS version is >= 12.0
+
 ## 1.2.0
 
 * Remove Privacy Manifest
