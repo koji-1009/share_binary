@@ -49,20 +49,18 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
         "share_binary", isDirectory: true)
       let fileUrl = directoryUrl.appendingPathComponent(filename)
 
-      DispatchQueue.global(qos: .background).async {
-        if !fileManager.fileExists(atPath: directoryUrl.path) {
-          try? fileManager.createDirectory(
-            atPath: directoryUrl.path,
-            withIntermediateDirectories: true)
-        }
-
-        if fileManager.fileExists(atPath: fileUrl.path) {
-          try? fileManager.removeItem(atPath: fileUrl.path)
-        }
-
-        fileManager.createFile(
-          atPath: fileUrl.path, contents: bytesTypedData.data)
+      if !fileManager.fileExists(atPath: directoryUrl.path) {
+        try? fileManager.createDirectory(
+          atPath: directoryUrl.path,
+          withIntermediateDirectories: true)
       }
+
+      if fileManager.fileExists(atPath: fileUrl.path) {
+        try? fileManager.removeItem(atPath: fileUrl.path)
+      }
+
+      fileManager.createFile(
+        atPath: fileUrl.path, contents: bytesTypedData.data)
 
       showShareSheet(uri: fileUrl)
 
