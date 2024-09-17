@@ -3,8 +3,8 @@ description: "Demonstrates how to use the share_binary plugin."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
-  flutter : '>=3.19.0'
+  sdk: '>=3.4.0 <4.0.0'
+  flutter : '>=3.22.0'
 
 dependencies:
   flutter:
@@ -21,7 +21,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
