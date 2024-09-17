@@ -1,6 +1,6 @@
 name: share_binary
 description: "This library provides the ability to use OS sharing features while handling binary files in dart code."
-version: 1.3.0
+version: 1.3.1
 homepage: https://github.com/koji-1009/share_binary
 
 environment:

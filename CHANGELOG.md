@@ -1,3 +1,8 @@
+## 1.3.1
+
+* Format swift code
+* Update dependencies
+
 ## 1.3.0
 
 * Support Swift Package Manager
