@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "share_binary",
-    platforms: [
-        .iOS("12.0")
-    ],
-    products: [
-        .library(name: "share-binary", targets: ["share_binary"])
-    ],
-    dependencies: [],
-    targets: [
-        .target(
-            name: "share_binary",
-            dependencies: [],
-            resources: []
-        )
-    ]
+  name: "share_binary",
+  platforms: [
+    .iOS("12.0")
+  ],
+  products: [
+    .library(name: "share-binary", targets: ["share_binary"])
+  ],
+  dependencies: [],
+  targets: [
+    .target(
+      name: "share_binary",
+      dependencies: [],
+      resources: []
+    )
+  ]
 )
