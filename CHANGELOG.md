@@ -1,3 +1,11 @@
+## 1.4.0
+
+* Update meta package to `^2.0.0`
+* Update web package to `^1.0.0`
+* Update flutter sdk constraints to `>=3.22.0`
+* Update android gradle file
+* Update example
+
 ## 1.3.1
 
 * Format swift code
