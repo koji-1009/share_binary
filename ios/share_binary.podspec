@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'share_binary'
-  s.version          = '1.3.1'
+  s.version          = '1.4.0'
   s.summary          = 'This library provides the ability to use OS sharing features while handling binary files in dart code.'
   s.description      = <<-DESC
 A new Flutter plugin project.

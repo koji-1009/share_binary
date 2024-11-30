@@ -7,18 +7,19 @@ This library allows you to use the OS's share function while treating binary fil
 ```dart
 import 'package:share_binary/share_binary.dart';
 
-Future<void> share() async {
+Future<void> shareImage() async {
   final image = await rootBundle.load('assets/image.png');
-  final video = await rootBundle.load('assets/video.mp4');
 
-  // Share image
   await const ShareBinary().shareBinary(
     bytes: image,
     filename: 'image.png',
     chooserTitle: 'Share image',
   );
+}
 
-  // Share video
+Future<void> shareVideo() async {
+  final video = await rootBundle.load('assets/video.mp4');
+
   await const ShareBinary().shareBinary(
     bytes: video,
     filename: 'video.mp4',
