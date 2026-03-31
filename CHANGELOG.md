@@ -1,3 +1,11 @@
+## 1.5.0
+
+* Change Android `shareBinary` from `ACTION_VIEW` to `ACTION_SEND` for broader app sharing support
+* Use `UIWindowScene` API for root view controller on iOS (minimum iOS 16.0)
+* Fix `UIActivityViewController` anchor view leak on iPad
+* Update Kotlin to 2.2.20, AGP to 8.11.1, compileSdk to 35
+* Update Dart SDK to `>=3.9.0`, Flutter to `>=3.35.0`
+
 ## 1.4.0
 
 * Update meta package to `^2.0.0`
