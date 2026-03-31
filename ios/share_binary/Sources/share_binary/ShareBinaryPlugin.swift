@@ -85,8 +85,9 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
 
   private func showShareSheet(uri: URL) {
     guard
-      let rootViewController = UIApplication.shared.delegate?.window??
-        .rootViewController,
+      let windowScene = UIApplication.shared.connectedScenes
+        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+      let rootViewController = windowScene.keyWindow?.rootViewController,
       let view = rootViewController.view
     else {
       return
@@ -97,16 +98,19 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
     if UIDevice.current.userInterfaceIdiom == .pad {
       let anchorView = UIView()
       view.addSubview(anchorView)
-
       anchorView.translatesAutoresizingMaskIntoConstraints = false
-      anchorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        .isActive = true
-      anchorView.centerYAnchor.constraint(equalTo: view.bottomAnchor)
-        .isActive = true
+      NSLayoutConstraint.activate([
+        anchorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        anchorView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      ])
 
       let popoverController = activityViewController
         .popoverPresentationController
       popoverController?.sourceView = anchorView
+
+      activityViewController.completionWithItemsHandler = { _, _, _, _ in
+        anchorView.removeFromSuperview()
+      }
     }
 
     rootViewController.present(
