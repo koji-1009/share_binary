@@ -29,10 +29,7 @@ class ShareBinary {
   ///  - [uri] is required, set [Uri] data.
   ///    It must be a URI with the necessary settings to share content.
   ///  - [chooserTitle] is only for Android.
-  Future<void> shareUri({
-    required Uri uri,
-    String? chooserTitle,
-  }) async {
+  Future<void> shareUri({required Uri uri, String? chooserTitle}) async {
     await ShareBinaryPlatform.instance.shareUri(
       uri: uri,
       chooserTitle: chooserTitle,
