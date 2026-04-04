@@ -21,14 +21,11 @@ final class MethodChannelShareBinary extends ShareBinaryPlatform {
     required String filename,
     String? chooserTitle,
   }) async {
-    await methodChannel.invokeMethod<void>(
-      'shareBinary',
-      <String, dynamic>{
-        'bytes': bytes,
-        'filename': filename,
-        'chooserTitle': chooserTitle,
-      },
-    );
+    await methodChannel.invokeMethod<void>('shareBinary', <String, dynamic>{
+      'bytes': bytes,
+      'filename': filename,
+      'chooserTitle': chooserTitle,
+    });
   }
 
   /// Share [Uri]
@@ -37,16 +34,10 @@ final class MethodChannelShareBinary extends ShareBinaryPlatform {
   ///    It must be a URI with the necessary settings to share content.
   ///  - [chooserTitle] is only for Android.
   @override
-  Future<void> shareUri({
-    required Uri uri,
-    String? chooserTitle,
-  }) async {
-    await methodChannel.invokeMethod<void>(
-      'shareUri',
-      <String, dynamic>{
-        'uri': uri.toString(),
-        'chooserTitle': chooserTitle,
-      },
-    );
+  Future<void> shareUri({required Uri uri, String? chooserTitle}) async {
+    await methodChannel.invokeMethod<void>('shareUri', <String, dynamic>{
+      'uri': uri.toString(),
+      'chooserTitle': chooserTitle,
+    });
   }
 }

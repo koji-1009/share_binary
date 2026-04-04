@@ -31,9 +31,7 @@ final class ShareBinaryWeb extends ShareBinaryPlatform {
     final mimeType = lookupMimeType(filename) ?? 'application/octet-stream';
     final blob = Blob(
       [bytes.buffer.toJS].toJS,
-      BlobPropertyBag(
-        type: mimeType,
-      ),
+      BlobPropertyBag(type: mimeType),
     );
     final url = URL.createObjectURL(blob);
 
@@ -52,10 +50,7 @@ final class ShareBinaryWeb extends ShareBinaryPlatform {
   ///    It must be a URI with the necessary settings to share content.
   ///  - [chooserTitle] is only for Android.
   @override
-  Future<void> shareUri({
-    required Uri uri,
-    String? chooserTitle,
-  }) async {
+  Future<void> shareUri({required Uri uri, String? chooserTitle}) async {
     window.open(uri.toString(), '_blank');
   }
 }

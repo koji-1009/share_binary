@@ -6,16 +6,20 @@ import PackageDescription
 let package = Package(
   name: "share_binary",
   platforms: [
-    .iOS("12.0")
+    .iOS("16.0")
   ],
   products: [
     .library(name: "share-binary", targets: ["share_binary"])
   ],
-  dependencies: [],
+  dependencies: [
+    .package(name: "FlutterFramework", path: "../FlutterFramework")
+  ],
   targets: [
     .target(
       name: "share_binary",
-      dependencies: [],
+      dependencies: [
+        .product(name: "FlutterFramework", package: "FlutterFramework")
+      ],
       resources: []
     )
   ]
