@@ -1,3 +1,10 @@
+## 1.6.0
+
+* Fix Swift Package Manager support: raise minimum Flutter to `>=3.44.0` and Dart SDK to `>=3.12.0`, matching the `FlutterFramework` Swift package that the SPM manifest depends on
+* Adopt the iOS UIScene lifecycle (`UISceneDelegate`): resolve the presenting view controller via `FlutterPluginRegistrar.viewController` instead of scanning `UIApplication.shared.connectedScenes`
+* Migrate Android to the Android Gradle Plugin 9 / built-in Kotlin toolchain (AGP 9.0.1, Kotlin 2.3.20)
+* Update Android `compileSdk` to 36 and raise `minSdk` to 24
+
 ## 1.5.0
 
 * Change Android `shareBinary` from `ACTION_VIEW` to `ACTION_SEND` for broader app sharing support
