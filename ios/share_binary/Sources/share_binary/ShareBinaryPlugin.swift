@@ -2,11 +2,22 @@ import Flutter
 import UIKit
 
 public class ShareBinaryPlugin: NSObject, FlutterPlugin {
+  /// Used to resolve the view controller displaying Flutter content. Per the
+  /// UIScene migration guide, the presenting view controller is reached through
+  /// `registrar.viewController` rather than by scanning
+  /// `UIApplication.shared.connectedScenes`.
+  private let registrar: FlutterPluginRegistrar
+
+  init(registrar: FlutterPluginRegistrar) {
+    self.registrar = registrar
+    super.init()
+  }
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(
       name: "com.dr1009.app/share_binary",
       binaryMessenger: registrar.messenger())
-    let instance = ShareBinaryPlugin()
+    let instance = ShareBinaryPlugin(registrar: registrar)
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 
@@ -85,9 +96,7 @@ public class ShareBinaryPlugin: NSObject, FlutterPlugin {
 
   private func showShareSheet(uri: URL) {
     guard
-      let windowScene = UIApplication.shared.connectedScenes
-        .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
-      let rootViewController = windowScene.keyWindow?.rootViewController,
+      let rootViewController = registrar.viewController,
       let view = rootViewController.view
     else {
       return
