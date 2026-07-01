@@ -79,14 +79,12 @@ class ShareBinaryPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     /* authority = */ "${applicationContext.packageName}.share_binary.provider",
                     /* file = */ file,
                 )
-                val mimeType = applicationContext.contentResolver.getType(uri) ?: "*/*"
                 val intent = Intent.createChooser(
                     /* target = */
-                    Intent(Intent.ACTION_SEND).apply {
-                        type = mimeType
-                        putExtra(Intent.EXTRA_STREAM, uri)
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    },
+                    Intent(Intent.ACTION_VIEW)
+                        .setData(uri)
+                        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
                     /* title = */ chooserTitle,
                 )
                 activity.startActivity(intent)
