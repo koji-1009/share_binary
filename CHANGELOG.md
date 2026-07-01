@@ -1,3 +1,7 @@
+## 1.6.1
+
+* Revert Android `shareBinary` from `ACTION_SEND` back to `ACTION_VIEW` (regression introduced in 1.5.0): apps that open the file (such as document viewers/editors), not only apps that receive shared content, appear in the chooser again
+
 ## 1.6.0
 
 * Fix Swift Package Manager support: raise minimum Flutter to `>=3.44.0` and Dart SDK to `>=3.12.0`, matching the `FlutterFramework` Swift package that the SPM manifest depends on
